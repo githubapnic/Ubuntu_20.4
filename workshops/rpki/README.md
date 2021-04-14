@@ -31,7 +31,7 @@ https://www.cisco.com/c/en/us/support/routers/7200-series-routers/tsd-products-s
 Change to root user (if necessary) and clone Git repository:
 ```
 cd ~
-git clone https://github.com/githubapnic/Ubuntu.git
+git clone https://github.com/githubapnic/Ubuntu_20.4.git
 ```
 Enter the new directory, change variables , update permissions, and run setup_rpki_workshop.sh, answer the questions:
 ```
