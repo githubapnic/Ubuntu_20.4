@@ -1,6 +1,6 @@
 # Install Packages for APNIC workshops
 ## Requirements
-This script is designed to work on Ubuntu 18.04 LTS. It should be run under root (not suitable for a production environment).
+This script is designed to work on Ubuntu 20.04 LTS. It should be run under root (not suitable for a production environment).
 ## Actions Performed
 * Update system packages
 * Install GNS3-Server
