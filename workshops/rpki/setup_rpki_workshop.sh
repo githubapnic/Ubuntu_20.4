@@ -34,7 +34,7 @@ function checkRoot()
 # Ensure script is run on Ubuntu 18.04 (not a super secure script)
 function checkUbuntu()
 {
-  if [[ $(lsb_release -rs) == "18.04" ]]; then
+  if [[ $(lsb_release -rs) == "20.04" ]]; then
   date >> $LOG_FILE
   echo "###### Checking Ubuntu Version" | tee -a $LOG_FILE
   else
@@ -369,4 +369,3 @@ copyScripts
 setupDynamips
 setTimeZone
 displayMessage
-
