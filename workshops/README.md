@@ -6,7 +6,7 @@ Change to root user (if necessary) and clone Git repository:
 ```
 cd ~
 git https://github.com/githubapnic/Ubuntu_20.4.git
-cd ~/Ubuntu/workshops
+cd ~/Ubuntu_20.4/workshops
 ```
 
 ## Commands for using LXC containers
