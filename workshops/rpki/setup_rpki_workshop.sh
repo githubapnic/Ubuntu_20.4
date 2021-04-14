@@ -166,6 +166,14 @@ function updateLXCtemplate()
   echo "###### SSH installed on template" | tee -a $LOG_FILE
 }
 
+# Install packages via apt
+function installPackages()
+{
+  echo "###### Installing New Packages" | tee -a $LOG_FILE
+  apt-get install -qq $(cat packagelist) >> $LOG_FILE
+  dpkg -l $(cat packagelist) &> /dev/null && echo "Success!" 
+}
+
 # Update packages via apt
 function updatePackages()
 {
@@ -210,8 +218,8 @@ function installDynamips()
     #apt-get install -qq dynamips:i386 >> $LOG_FILE
 	wget http://mirror.optus.net/ubuntu/pool/multiverse/d/dynamips/dynamips_0.2.14-1build1_i386.deb >> $LOG_FILE
 	wget http://mirror.optus.net/ubuntu/pool/main/c/configobj/python-configobj_5.0.6-2_all.deb >> $LOG_FILE
-	apt install -qq python-configobj_5.0.6-2_all.deb >> $LOG_FILE
-	apt install -qq dynamips_0.2.14-1build1_i386.deb >> $LOG_FILE
+	apt install -qq ./dynamips_0.2.14-1build1_i386.deb >> $LOG_FILE	
+	apt install -qq ./python-configobj_5.0.6-2_all.deb >> $LOG_FILE
     checkSuccess dynamips
   fi
 }
@@ -377,6 +385,7 @@ fi
 checkRoot
 checkUbuntu
 # keepHomeDirectory
+installPackages
 updatePackages
 installSSH
 installScreen
