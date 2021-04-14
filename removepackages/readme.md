@@ -19,7 +19,7 @@ To use the script open a new terminal window (Use Ctrl+alt+T to open terminal) a
 ```bash
 sudo apt-get install -y git net-tools screen
 git clone https://github.com/githubapnic/Ubuntu_20.4.git
-cd Ubuntu/removepackages/
+cd Ubuntu_20.4/removepackages/
 chmod 744 remove_packages.sh
 sudo ./removepackages.sh
 ```
