@@ -67,8 +67,29 @@ function disableAutoUpdates()
   cat /etc/apt/apt.conf.d/20auto-upgrades | tee -a $LOG_FILE
 }
 
+function removeCloudInit()
+{
+  echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg >> $LOG_FILE
+  apt-get purge cloud-init - y >> $LOG_FILE
+  rm -rf /etc/cloud/ >> $LOG_FILE
+  rm -rf /var/lib/cloud/ >> $LOG_FILE
+}
+
+# Display message about where files are located
+function displayMessage()
+{
+  echo "##########################################################" | tee -a $LOG_FILE
+  echo "####### Installation Finished. " | tee -a $LOG_FILE
+  echo
+  echo "Please reboot before continuing" | tee -a $LOG_FILE
+  echo
+  echo "##########################################################" | tee -a $LOG_FILE
+}
+
 # Run the functions 
 checkRoot
 addTerminaltoLauncher
 removePackages
 disableAutoUpdates
+removeCloudInit
+displayMessage
