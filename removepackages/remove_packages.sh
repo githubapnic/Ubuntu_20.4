@@ -70,7 +70,7 @@ function disableAutoUpdates()
 function removeCloudInit()
 {
   echo 'datasource_list: [ None ]' | sudo -s tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg >> $LOG_FILE
-  apt-get purge cloud-init - y >> $LOG_FILE
+  apt-get -y purge cloud-init >> $LOG_FILE
   rm -rf /etc/cloud/ >> $LOG_FILE
   rm -rf /var/lib/cloud/ >> $LOG_FILE
 }
