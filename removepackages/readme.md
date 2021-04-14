@@ -17,7 +17,7 @@ This script was created as a way to standardise the removal of unwanted packages
 To use the script open a new terminal window (Use Ctrl+alt+T to open terminal) and type the following commands:
 
 ```bash
-sudo apt-get install -y git
+sudo apt-get install -y git net-tools screen
 git clone https://github.com/githubapnic/Ubuntu_20.4.git
 cd Ubuntu/removepackages/
 chmod 744 remove_packages.sh
