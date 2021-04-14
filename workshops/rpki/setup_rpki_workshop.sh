@@ -207,7 +207,11 @@ function installDynamips()
     echo "###### Installing dynamips" | tee -a $LOG_FILE
     dpkg --add-architecture i386 >> $LOG_FILE
     apt-get update -qq >> $LOG_FILE
-    apt-get install -qq dynamips:i386 >> $LOG_FILE
+    #apt-get install -qq dynamips:i386 >> $LOG_FILE
+	wget http://mirror.optus.net/ubuntu/pool/multiverse/d/dynamips/dynamips_0.2.14-1build1_i386.deb >> $LOG_FILE
+	wget http://mirror.optus.net/ubuntu/pool/main/c/configobj/python-configobj_5.0.6-2_all.deb >> $LOG_FILE
+	apt install -qq python-configobj_5.0.6-2_all.deb >> $LOG_FILE
+	apt install -qq dynamips_0.2.14-1build1_i386.deb >> $LOG_FILE
     checkSuccess dynamips
   fi
 }
@@ -221,7 +225,10 @@ function installDynagen()
   else
     echo "###### Installing dynagen" | tee -a $LOG_FILE
     apt-get update -qq >> $LOG_FILE
-    apt-get install -qq dynagen >> $LOG_FILE
+    #apt-get install -qq dynagen >> $LOG_FILE
+	wget http://mirror.optus.net/ubuntu/pool/multiverse/d/dynagen/dynagen_0.11.0-7_all.deb >> $LOG_FILE
+	dpkg --force-all -i dynagen_0.11.0-7_all.deb >> $LOG_FILE
+	rm *.deb
     checkSuccess dynagen
   fi
 }
@@ -349,9 +356,27 @@ function updateDNSresolver()
   sudo cat /etc/resolvconf/resolv.conf.d/head | grep nameserver | tee -a $LOG_FILE
 }
 
+# Fix for Ubuntu 20.04 to keep $HOME variables
+function keepHomeDirectory()
+{
+  # Take a backup of sudoers file and change the backup file.
+  cp /etc/sudoers /tmp/sudoers.bak
+  echo 'Defaults env_keep += "HOME"' >> /tmp/sudoers.bak
+
+  # Check syntax of the backup file to make sure it is correct.
+  sudo visudo -cf /tmp/sudoers.bak
+  if [ $? -eq 0 ]; then
+    # Replace the sudoers file with the new only if syntax is correct.
+    sudo mv /tmp/sudoers.bak /etc/sudoers
+  else
+    echo "Could not modify /etc/sudoers file. Please do this manually."
+fi
+}
+
 # Run the functions 
 checkRoot
 checkUbuntu
+# keepHomeDirectory
 updatePackages
 installSSH
 installScreen
